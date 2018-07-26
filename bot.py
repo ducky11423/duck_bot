@@ -16,10 +16,16 @@ try:
     f.close()
 except:
     print("Failed to load config. Run setup.py to create config file, if config file exists ensure it is a valid JSON")
-sys.exit()
+    sys.exit()
 
-bot = commands.Bot(command_prefix='quack')
+bot = commands.Bot(command_prefix='quack ')
+
+@bot.event
+async def on_ready():
+    print(f"Connected as {bot.user.name} - {bot.user.id}")
 
 if __name__ == "__main__":
     # load extensions
+    bot.load_extension('util')
+
     bot.run(config["bot_token"], bot=True, reconnect=True)
