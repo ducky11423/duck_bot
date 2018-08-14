@@ -15,5 +15,13 @@ class Util:
             embed.set_image(url=member.avatar_url)
             await ctx.send(embed=embed)
 
+    @commands.command()
+    async def emoji(self, ctx, *, arg):
+        converter = commands.EmojiConverter()
+        emoji = await converter.convert(ctx, arg)
+        embed = discord.Embed(title=f"Emoji {emoji.name}")
+        embed.set_image(url=emoji.url)
+        await ctx.send(embed=embed)
+
 def setup(bot):
     bot.add_cog(Util(bot))
